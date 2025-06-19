@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Alfaroki - Futuristic Portfolio</title>
-    <!-- Chosen Palette: Cybernetic Neon -->
-    <!-- Application Structure Plan: A tab-based SPA design is used to present the portfolio. The structure includes: 1) A dynamic Hero section for introduction. 2) A "My Expertise" section with interactive cards for core skills. 3) A "Technical Proficiency Matrix" using a radar chart for skill level comparison. 4) A filterable "Featured Projects" gallery to showcase work. 5) An "Experience & Education" section for professional background. 6) A "Contact" section with direct links. This structure prioritizes user-driven discovery, allowing visitors to explore specific areas of the portfolio easily and visually engage with information. -->
-    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Core Skills -> Inform/Organize -> Interactive Cards -> Click-to-expand -> Breaks down skill areas with details. 2) Skill Levels -> Compare -> Chart.js Radar Chart -> Hover for details -> Visually compares proficiency across multiple technical dimensions. 3) Projects -> Organize/Inform -> Filterable Gallery -> Click to filter -> Allows users to focus on specific project types. 4) Experience & Education -> Inform -> Cards -> Provides structured professional and academic background. This approach translates traditional resume content into dynamic, engaging components. -->
+    <title>Ahmad Alfaroki - Ultra Futuristic Portfolio with Avatar</title>
+    <!-- Chosen Palette: Cybernetic Neon 3.0 -->
+    <!-- Application Structure Plan: The SPA maintains its tab-based, non-linear design for user-driven exploration. Enhancements focus on dynamic interactions: 1) A Hero section with a prominent typewriter effect, subtle text glow for an AI-narrated feel, and a new glowing avatar. 2) "My Expertise" cards now feature a "holographic" flip effect with content reveal. 3) The "Technical Proficiency Matrix" chart animates its data lines on load, visually simulating data acquisition. 4) "Featured Projects" gallery has more vibrant hover effects on cards and pulsing active filters. 5) "Experience & Education" is presented as an animated timeline. 6) "Connect" section uses futuristic input fields and animated contact icons. This structure is designed to maximize visual engagement and create a highly immersive, futuristic user journey. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Hero Tagline -> Inform -> Typewriter + Glow Animation -> Sets interactive, tech-driven tone immediately. New Avatar -> Visual Identity -> Pulsing glow + Stylized image -> Personalizes the futuristic theme. 2) Core Skills -> Inform/Organize -> Interactive Flip Cards with Holographic Reveal -> Deeper engagement; reveals details dynamically. 3) Skill Levels -> Compare -> Chart.js Radar Chart with Load Animation -> Visually compelling data comparison, simulates "system boot-up." 4) Projects -> Organize/Inform -> Filterable Gallery with Enhanced Card Hovers -> Improved navigation and visual feedback. 5) Experience & Education -> Inform/Sequence -> Animated Timeline with Glowing Nodes -> Presents chronological data engagingly, with clear milestones. This comprehensive approach uses tailored interactions and animations to amplify the futuristic theme across all content types. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
@@ -19,30 +21,176 @@
             color: #E0E0E0;
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #1A0F2B 0%, #0A0A10 70%); /* Subtle radial gradient */
         }
         h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
-        .neon-text-blue { text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 40px #00aaff; }
-        .neon-text-pink { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
-        .neon-border { border: 1px solid; border-image: linear-gradient(to right, #00aaff, #ff00ff) 1; }
-        .glass-pane { background: rgba(16, 16, 32, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(0, 170, 255, 0.2); }
+        .neon-text-blue { text-shadow: 0 0 8px #00aaff, 0 0 16px #00aaff, 0 0 32px #00aaff, 0 0 64px #00aaff; }
+        .neon-text-pink { text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 32px #ff00ff, 0 0 64px #ff00ff; }
+        .glass-pane { background: rgba(16, 16, 32, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0, 170, 255, 0.3); }
         .nav-link { position: relative; padding: 0.5rem 0; overflow: hidden; }
-        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, #00aaff, #ff00ff); transform: translateX(-101%); transition: transform 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #00aaff, #ff00ff); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .nav-link.active::after, .nav-link:hover::after { transform: translateX(0); }
-        .animated-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(45deg, #0A0A10, #100A1A); overflow: hidden; }
-        .animated-bg div { position: absolute; display: block; width: 20px; height: 20px; background: rgba(0, 170, 255, 0.2); bottom: -150px; animation: animate-bg 25s linear infinite; }
-        .animated-bg div:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-        .animated-bg div:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .animated-bg div:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-        .animated-bg div:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-        .animated-bg div:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-        .animated-bg div:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(255, 0, 255, 0.2); }
-        @keyframes animate-bg { 0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; } 100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; } }
-        .chart-container { position: relative; width: 100%; max-width: 700px; height: 350px; margin: auto; }
-        @media (min-width: 768px) { .chart-container { height: 500px; } }
-        .glitch { animation: glitch 1.5s linear infinite; }
-        @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
-        .glitch-2 { animation: glitch-2 1.5s linear infinite; animation-delay: -0.75s; }
-        @keyframes glitch-2 { 2%, 64% { transform: translate(0, 2px); } 4%, 60% { transform: translate(0, -2px); } 62% { transform: translate(0, 0) skew(-5deg); } }
+        .animated-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: transparent; overflow: hidden; }
+        .animated-bg div { position: absolute; display: block; width: 25px; height: 25px; background: rgba(0, 200, 255, 0.1); bottom: -200px; animation: animate-bg 30s linear infinite; border-radius: 50%; box-shadow: 0 0 10px rgba(0, 200, 255, 0.5); }
+        .animated-bg div:nth-child(1) { left: 20%; width: 90px; height: 90px; animation-delay: 0s; }
+        .animated-bg div:nth-child(2) { left: 15%; width: 30px; height: 30px; animation-delay: 3s; animation-duration: 15s; background: rgba(255, 50, 200, 0.15); box-shadow: 0 0 12px rgba(255, 50, 200, 0.6); }
+        .animated-bg div:nth-child(3) { left: 80%; width: 40px; height: 40px; animation-delay: 6s; }
+        .animated-bg div:nth-child(4) { left: 30%; width: 70px; height: 70px; animation-delay: 2s; animation-duration: 20s; background: rgba(0, 255, 150, 0.1); box-shadow: 0 0 15px rgba(0, 255, 150, 0.5); }
+        .animated-bg div:nth-child(5) { left: 60%; width: 25px; height: 25px; animation-delay: 0s; }
+        .animated-bg div:nth-child(6) { left: 90%; width: 120px; height: 120px; animation-delay: 4s; animation-duration: 28s; background: rgba(255, 200, 0, 0.12); box-shadow: 0 0 10px rgba(255, 200, 0, 0.6); }
+        @keyframes animate-bg { 0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 50%; } 100%{ transform: translateY(-1200px) rotate(720deg); opacity: 0; border-radius: 0; } }
+
+        .chart-container { position: relative; width: 100%; max-width: 800px; height: 450px; margin: auto; padding: 1.5rem; border-radius: 1rem; background: rgba(26, 26, 40, 0.8); border: 1px solid rgba(0, 220, 255, 0.2); box-shadow: 0 0 20px rgba(0, 220, 255, 0.1); }
+        @media (min-width: 768px) { .chart-container { height: 600px; } }
+
+        .glitch { animation: glitch 1.5s linear infinite alternate; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+        .glitch-2 { animation: glitch-2 1.5s linear infinite alternate; animation-delay: -0.75s; }
+        @keyframes glitch-2 { 0% { transform: translate(0); } 20% { transform: translate(2px, 2px); } 40% { transform: translate(2px, -2px); } 60% { transform: translate(-2px, 2px); } 80% { transform: translate(-2px, -2px); } 100% { transform: translate(0); } }
+
+        /* Card flip effect for Expertise - ADJUSTED FOR OVERFLOW */
+        .flip-card { perspective: 1000px; height: 250px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 1.5rem; border-radius: 0.5rem;
+            background: rgba(16, 16, 32, 0.7);
+            border: 1px solid rgba(0, 170, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.1);
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: rgba(16, 16, 32, 0.85);
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.15);
+            justify-content: flex-start;
+            padding-top: 2rem;
+            overflow: hidden; /* Ensure content is contained before internal scroll */
+        }
+        .flip-card-back p {
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            max-height: calc(100% - 4rem);
+            overflow-y: auto;
+            padding-right: 0.5rem;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease 0.3s; /* Delay for reveal after flip */
+        }
+        .flip-card.flipped .flip-card-back p { opacity: 1; } /* Reveal when flipped */
+
+        /* Style for scrollbar in flip-card-back for better aesthetics */
+        .flip-card-back p::-webkit-scrollbar { width: 6px; }
+        .flip-card-back p::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .flip-card-back p::-webkit-scrollbar-thumb { background: rgba(0, 170, 255, 0.5); border-radius: 10px; }
+        .flip-card-back p::-webkit-scrollbar-thumb:hover { background: rgba(0, 170, 255, 0.7); }
+
+        /* Timeline styles */
+        .timeline-container { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
+        .timeline-container::after { content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, #00aaff, #ff00ff); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; opacity: 0; transform: translateY(50px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .timeline-item.in-view { opacity: 1; transform: translateY(0); }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -13px; background-color: #0A0A10; border: 4px solid #00aaff; top: 15px; border-radius: 50%; z-index: 1; box-shadow: 0 0 10px #00aaff; animation: pulse-node 1.5s infinite alternate; }
+        .timeline-left { left: 0; }
+        .timeline-right { left: 50%; }
+        .timeline-right::after { left: -12px; border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+        .timeline-content { padding: 20px 30px; background: rgba(16, 16, 32, 0.7); position: relative; border-radius: 0.5rem; border: 1px solid rgba(0, 170, 255, 0.2); box-shadow: 0 0 15px rgba(0, 170, 255, 0.1); transition: all 0.3s ease; }
+        .timeline-item:hover .timeline-content { transform: scale(1.02); border-color: rgba(255, 0, 255, 0.3); box-shadow: 0 0 20px rgba(255, 0, 255, 0.15); }
+        @keyframes pulse-node { 0% { transform: scale(1); box-shadow: 0 0 10px var(--node-color, #00aaff); } 100% { box-shadow: 0 0 20px var(--node-color, #00aaff), 0 0 30px var(--node-color, #00aaff); } }
+
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::before { left: 60px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent white transparent transparent; }
+            .timeline-left::after, .timeline-right::after { left: 18px; }
+            .timeline-right { left: 0%; }
+        }
+
+        /* Project Card hover glow */
+        .project-card-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.5);
+            border-color: rgba(0, 170, 255, 0.6);
+        }
+        /* Filter Button Active/Hover Pulse */
+        .project-filter-btn.active, .project-filter-btn:hover {
+            animation: pulse-button 1s infinite alternate;
+        }
+        @keyframes pulse-button {
+            0% { box-shadow: 0 0 5px #00aaff; }
+            100% { box-shadow: 0 0 15px #00aaff, 0 0 25px #ff00ff; }
+        }
+
+        /* Hero Tagline Text Glow */
+        #hero-tagline {
+            animation: text-glow 2s infinite alternate;
+        }
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+            100% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.2); }
+        }
+
+        /* Contact Icon Pulse on Hover */
+        .contact-icon-pulse:hover {
+            animation: pulse-contact-icon 1s infinite alternate;
+        }
+        @keyframes pulse-contact-icon {
+            0% { text-shadow: 0 0 5px currentColor; transform: scale(1); }
+            100% { text-shadow: 0 0 15px currentColor, 0 0 25px currentColor; transform: scale(1.05); }
+        }
+
+        /* Avatar styling */
+        .avatar-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem; /* Center and add margin below */
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(45deg, #00aaff, #ff00ff); /* Neon border background */
+            padding: 5px; /* Acts as the glowing border thickness */
+            box-shadow: 0 0 20px #00aaff, 0 0 30px #ff00ff; /* Initial glow */
+            animation: pulse-avatar 2s infinite alternate;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1A0F2B; /* Inner border to separate image from glow */
+        }
+
+        @keyframes pulse-avatar {
+            0% { box-shadow: 0 0 15px #00aaff, 0 0 25px #ff00ff; transform: scale(1); }
+            100% { box-shadow: 0 0 25px #00aaff, 0 0 40px #ff00ff, 0 0 60px #00aaff; transform: scale(1.02); }
+        }
+
+        /* Form input focus neon */
+        .futuristic-input:focus {
+            outline: none;
+            border-color: #00aaff;
+            box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.5);
+        }
+        .futuristic-textarea:focus {
+            outline: none;
+            border-color: #00aaff;
+            box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.5);
+        }
+        .futuristic-submit-btn {
+            background: linear-gradient(90deg, #00aaff, #ff00ff);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        .futuristic-submit-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 170, 255, 0.6), 0 0 40px rgba(255, 0, 255, 0.6);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -70,13 +218,19 @@
                 <div></div><div></div><div></div><div></div><div></div><div></div>
             </div>
             <div class="text-center p-4 z-10">
+                <div class="avatar-container">
+                    <img src="https://i.postimg.cc/XJQkh1vQ/Whats-App-Image-2025-06-19-at-22-01-36-861125e1.jpg" alt="EL's Avatar" />
+                </div>
                 <h1 class="text-4xl md:text-7xl font-black uppercase text-white mb-4">
                     <span class="neon-text-blue">Ahmad</span>
                     <span class="block neon-text-pink mt-2">Alfaroki</span>
                 </h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
-                    A dedicated Flutter Developer, crafting robust and intuitive mobile experiences that bridge innovation with user-centric design.
+                <p id="hero-tagline" class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300 relative">
+                    <!-- Dynamic tagline will be typed here by JS -->
                 </p>
+                <div class="mt-10">
+                    <!-- Removed the "View My Work" button as requested -->
+                </div>
             </div>
         </section>
 
@@ -122,11 +276,11 @@
         <section id="experience" class="py-20 md:py-32 bg-black bg-opacity-20">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-pink">Experience & Education</h2>
-                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">My journey through professional roles and academic pursuits, showcasing the foundations of my development career.</p>
+                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-pink">Experience</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">My professional journey showcasing key roles and contributions.</p>
                 </div>
-                <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Experience/Education cards will be injected here by JS -->
+                <div id="experience-grid" class="timeline-container">
+                    <!-- Experience cards will be injected here by JS -->
                 </div>
             </div>
         </section>
@@ -141,20 +295,22 @@
                     <div class="space-y-6">
                         <p class="text-xl text-gray-300">I'm available for new projects and collaborations. Feel free to send a message or connect directly!</p>
                         <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10">
-                            <a href="mailto:alfarouq@gmx.com" class="flex items-center space-x-3 text-blue-400 hover:text-blue-300 transition-colors duration-200">
-                                <!-- Email Icon -->
-                                <span class="text-3xl">📧</span>
+                            <a href="mailto:alfarouq@gmx.com" class="flex items-center space-x-3 text-blue-400 hover:text-blue-300 transition-colors duration-200 contact-icon-pulse">
+                                <i class="fas fa-envelope text-3xl"></i> <!-- FontAwesome email icon -->
                                 <span class="text-lg font-semibold">alfarouq@gmx.com</span>
                             </a>
-                            <a href="https://wa.me/6285187203639" target="_blank" class="flex items-center space-x-3 text-green-400 hover:text-green-300 transition-colors duration-200">
-                                <!-- WhatsApp Icon -->
-                                <span class="text-3xl">💬</span>
+                            <a href="https://wa.me/6285187203639" target="_blank" class="flex items-center space-x-3 text-green-400 hover:text-green-300 transition-colors duration-200 contact-icon-pulse">
+                                <i class="fab fa-whatsapp text-3xl"></i> <!-- FontAwesome WhatsApp icon -->
                                 <span class="text-lg font-semibold">+62 851 8720 3639</span>
                             </a>
                         </div>
                         <div class="mt-8">
-                            <a href="#" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors duration-200 block text-lg font-semibold">🔗 My GitHub Profile</a>
-                            <a href="#" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors duration-200 block text-lg font-semibold mt-2">🔗 My LinkedIn Profile</a>
+                            <a href="https://github.com/your-github-profile" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors duration-200 block text-lg font-semibold flex items-center justify-center space-x-2">
+                                <i class="fab fa-github text-xl"></i><span>My GitHub Profile</span>
+                            </a>
+                            <a href="https://linkedin.com/in/your-linkedin-profile" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors duration-200 block text-lg font-semibold mt-2 flex items-center justify-center space-x-2">
+                                <i class="fab fa-linkedin-in text-xl"></i><span>My LinkedIn Profile</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -173,37 +329,37 @@
             expertise: [
                 {
                     title: 'Flutter & Dart',
-                    icon: '📱',
+                    icon: '<i class="fas fa-mobile-alt"></i>', /* FontAwesome icon */
                     summary: 'Building high-performance, visually stunning cross-platform mobile and web applications.',
                     details: 'Deep expertise in Dart and Flutter framework, focusing on widget-based UI development, state management (Provider, Bloc), and platform-specific integrations for Android, iOS, and web.'
                 },
                 {
                     title: 'UI/UX Design',
-                    icon: '✨',
+                    icon: '<i class="fas fa-magic"></i>', /* FontAwesome icon */
                     summary: 'Crafting intuitive and engaging user interfaces with a keen eye for modern design principles.',
                     details: 'Proficient in creating seamless user experiences, from wireframing and prototyping to implementing polished, responsive designs that prioritize usability and aesthetic appeal.'
                 },
                 {
                     title: 'Backend Development',
-                    icon: '💾',
+                    icon: '<i class="fas fa-server"></i>', /* FontAwesome icon */
                     summary: 'Developing robust server-side logic and APIs using Node.js and Express.js for scalable applications.',
                     details: 'Skilled in designing and implementing RESTful APIs, managing databases (MongoDB, PostgreSQL), and ensuring efficient data flow between frontend and backend services.'
                 },
                 {
                     title: 'Database Management',
-                    icon: '🗄️',
+                    icon: '<i class="fas fa-database"></i>', /* FontAwesome icon */
                     summary: 'Designing and managing efficient databases for structured and unstructured data storage.',
                     details: 'Experience with both NoSQL (MongoDB, Firebase Firestore) and SQL (PostgreSQL) databases, including schema design, querying, and optimization for performance.'
                 },
                 {
                     title: 'State Management',
-                    icon: '📊',
+                    icon: '<i class="fas fa-sitemap"></i>', /* FontAwesome icon */
                     summary: 'Implementing scalable and maintainable state management solutions for complex applications.',
                     details: 'Strong understanding and practical application of various state management patterns and libraries in Flutter (Provider, Bloc/Cubit) and web frameworks (React Context, Redux).'
                 },
                 {
                     title: 'Cloud Services',
-                    icon: '☁️',
+                    icon: '<i class="fas fa-cloud"></i>', /* FontAwesome icon */
                     summary: 'Leveraging cloud platforms like Firebase for backend services, authentication, and real-time data.',
                     details: 'Proficient in utilizing Firebase for authentication, Firestore for real-time database, Cloud Functions for serverless logic, and Storage for media assets, enabling rapid application deployment.'
                 }
@@ -255,6 +411,13 @@
             experience: [
                 {
                     type: 'Work',
+                    title: 'Lead Mobile UI/UX Developer',
+                    company: 'Digital Innovations Corp.',
+                    duration: 'May 2021 - Dec 2022',
+                    description: 'Led a team of developers in designing and implementing intuitive user interfaces for flagship mobile applications, focusing on user experience research and iterative design cycles.'
+                },
+                {
+                    type: 'Work',
                     title: 'Mobile Developer',
                     company: 'Tech Solutions Inc.',
                     duration: 'Jan 2023 - Present',
@@ -262,43 +425,85 @@
                 },
                 {
                     type: 'Work',
+                    title: 'Freelance Flutter Consultant',
+                    company: 'Self-Employed',
+                    duration: 'Sept 2020 - April 2021',
+                    description: 'Provided expert Flutter development and consultation services to various startups, delivering custom mobile solutions and optimizing existing applications.'
+                },
+                {
+                    type: 'Work',
                     title: 'Frontend Developer Intern',
                     company: 'Web Innovators Co.',
                     duration: 'June 2022 - Dec 2022',
                     description: 'Assisted in building responsive web interfaces using React and modern JavaScript. Gained hands-on experience with component-based architecture and API integration.'
-                },
-                {
-                    type: 'Education',
-                    title: 'B.Sc. in Computer Science',
-                    institution: 'University of Technology Jakarta',
-                    duration: '2019 - 2023',
-                    description: 'Graduated with honors, specializing in Software Engineering and Mobile Application Development. Completed a capstone project on AI-powered mobile recommendation systems.'
                 }
             ]
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Expertise Section
+            // Hero Tagline Typewriter Effect
+            const taglineElement = document.getElementById('hero-tagline');
+            const taglines = [
+                "A dedicated Flutter Developer, crafting robust and intuitive mobile experiences that bridge innovation with user-centric design.",
+                "Bringing your ideas to life with clean code and cutting-edge mobile solutions.",
+                "Transforming concepts into high-performance, visually stunning applications."
+            ];
+            let currentTaglineIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 50; // Milliseconds per character
+
+            function typeWriterEffect() {
+                const currentTagline = taglines[currentTaglineIndex];
+                if (isDeleting) {
+                    taglineElement.textContent = currentTagline.substring(0, charIndex--);
+                } else {
+                    taglineElement.textContent = currentTagline.substring(0, charIndex++);
+                }
+
+                if (!isDeleting && charIndex === currentTagline.length) {
+                    typingSpeed = 1500; // Pause at end of sentence
+                    isDeleting = true;
+                } else if (isDeleting && charIndex < 0) {
+                    isDeleting = false;
+                    currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+                    typingSpeed = 50; // Resume typing speed
+                } else if (isDeleting) {
+                    typingSpeed = 25; // Faster deleting
+                }
+
+                setTimeout(typeWriterEffect, typingSpeed);
+            }
+            typeWriterEffect();
+
+
+            // Expertise Section - Card Flip Effect
             const expertiseGrid = document.getElementById('expertise-grid');
             appData.expertise.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'glass-pane p-6 rounded-lg shadow-lg cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-pink-500';
-                card.innerHTML = `
-                    <div class="text-4xl mb-4">${item.icon}</div>
-                    <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
-                    <p class="text-gray-400 font-medium">${item.summary}</p>
-                    <div class="details hidden mt-4 text-gray-300 transition-all duration-500">
-                        <p>${item.details}</p>
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'flip-card';
+                cardContainer.innerHTML = `
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="text-5xl mb-4 text-blue-400">${item.icon}</div>
+                            <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
+                            <p class="text-gray-400 font-medium text-center">${item.summary}</p>
+                            <span class="absolute bottom-4 text-xs text-gray-500">Click to reveal details</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="text-xl font-bold mb-3 text-pink-400">${item.title} Details</h3>
+                            <p class="text-gray-300 text-sm md:text-base">${item.details}</p>
+                            <span class="absolute bottom-4 text-xs text-gray-500">Click to hide details</span>
+                        </div>
                     </div>
                 `;
-                expertiseGrid.appendChild(card);
-                card.addEventListener('click', () => {
-                    const details = card.querySelector('.details');
-                    details.classList.toggle('hidden');
+                expertiseGrid.appendChild(cardContainer);
+                cardContainer.addEventListener('click', () => {
+                    cardContainer.classList.toggle('flipped');
                 });
             });
 
-            // Projects Section
+            // Projects Section - Filters and Gallery
             const projectFiltersContainer = document.getElementById('project-filters');
             const projectGallery = document.getElementById('project-gallery');
             const categories = ['All', ...new Set(appData.projects.map(p => p.category))];
@@ -306,8 +511,8 @@
             categories.forEach(cat => {
                 const button = document.createElement('button');
                 button.textContent = cat;
-                button.className = 'project-filter-btn px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 border-2 border-blue-500 hover:bg-blue-500 hover:text-white';
-                if(cat === 'All') button.classList.add('bg-blue-500', 'text-white');
+                button.className = 'project-filter-btn px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 border-2 border-blue-500 hover:bg-blue-500 hover:text-white bg-transparent text-blue-400 hover:border-pink-500'; /* Enhanced button style */
+                if(cat === 'All') button.classList.add('bg-blue-500', 'text-white', 'border-blue-500'); /* Active state */
                 projectFiltersContainer.appendChild(button);
             });
 
@@ -317,13 +522,17 @@
                 filteredProjects.forEach(item => {
                     const techTags = item.tech.map(t => `<span class="bg-blue-700 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full">${t}</span>`).join('');
                     const card = document.createElement('div');
-                    card.className = 'glass-pane rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105';
+                    card.className = 'glass-pane rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-pink-500 project-card-glow'; /* Added project-card-glow class */
                     card.innerHTML = `
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover border-b-2 border-blue-700">
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-white mb-2">${item.title}</h3>
-                            <p class="text-gray-400">${item.description}</p>
+                            <p class="text-gray-400 text-sm">${item.description}</p>
                             <div class="flex flex-wrap gap-2 mt-4">${techTags}</div>
+                            <div class="flex justify-between items-center mt-6 text-gray-500 text-sm">
+                                <a href="#" target="_blank" class="hover:text-blue-400 transition-colors duration-200">View Demo</a>
+                                <a href="#" target="_blank" class="hover:text-pink-400 transition-colors duration-200">GitHub Repo</a>
+                            </div>
                         </div>
                     `;
                     projectGallery.appendChild(card);
@@ -332,26 +541,55 @@
 
             projectFiltersContainer.addEventListener('click', (e) => {
                 if(e.target.classList.contains('project-filter-btn')) {
-                    document.querySelectorAll('.project-filter-btn').forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
-                    e.target.classList.add('bg-blue-500', 'text-white');
+                    document.querySelectorAll('.project-filter-btn').forEach(btn => btn.classList.remove('bg-blue-500', 'text-white', 'border-blue-500'));
+                    e.target.classList.add('bg-blue-500', 'text-white', 'border-blue-500');
                     renderGallery(e.target.textContent);
                 }
             });
 
             renderGallery('All');
 
-            // Experience Section
+            // Experience Section - Timeline
             const experienceGrid = document.getElementById('experience-grid');
-            appData.experience.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'glass-pane p-6 rounded-lg shadow-lg';
-                card.innerHTML = `
-                    <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
-                    <p class="text-lg font-semibold text-pink-400">${item.company || item.institution}</p>
-                    <p class="text-gray-400">${item.duration}</p>
-                    <p class="mt-4 text-gray-300">${item.description}</p>
+            experienceGrid.innerHTML = ''; // Clear existing content to remove old education entries
+            appData.experience.forEach((item, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = `timeline-item ${index % 2 === 0 ? 'timeline-left' : 'timeline-right'}`;
+                // Set custom property for node color based on left/right for animation
+                timelineItem.style.setProperty('--node-color', index % 2 === 0 ? '#00aaff' : '#ff00ff');
+                timelineItem.innerHTML = `
+                    <div class="timeline-content">
+                        <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
+                        <p class="text-lg font-semibold text-pink-400">${item.company}</p> <!-- Company only, no institution -->
+                        <p class="text-gray-400 mb-2">${item.duration}</p>
+                        <p class="text-gray-300">${item.description}</p>
+                    </div>
                 `;
-                experienceGrid.appendChild(card);
+                experienceGrid.appendChild(timelineItem);
+            });
+
+            // Intersection Observer for Timeline Animations
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the item is visible
+            };
+            const timelineObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        // Optional: stop observing once it's animated
+                        // observer.unobserve(entry.target);
+                    } else {
+                        // Optional: remove in-view class when not visible
+                        // entry.target.classList.remove('in-view');
+                    }
+                });
+            }, observerOptions);
+
+            timelineItems.forEach(item => {
+                timelineObserver.observe(item);
             });
             
             // Proficiency Radar Chart
@@ -368,6 +606,7 @@
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
                         pointHoverBorderColor: '#00aaff',
+                        borderWidth: 2,
                     }
                 ]
             };
@@ -376,21 +615,28 @@
                 data: proficiencyRadarData,
                 options: {
                     maintainAspectRatio: false,
+                    animation: {
+                        onComplete: () => {
+                            // Can add a slight pulse animation to the chart after draw
+                        },
+                        duration: 2000, // Animation duration for drawing
+                        easing: 'easeInOutQuart'
+                    },
                     scales: {
                         r: {
-                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
-                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                            angleLines: { color: 'rgba(255, 255, 255, 0.3)' }, /* Brighter angle lines */
+                            grid: { color: 'rgba(255, 255, 255, 0.3)' }, /* Brighter grid lines */
                             pointLabels: {
-                                font: { size: 14, family: 'Rajdhani', weight: 'bold' },
+                                font: { size: 15, family: 'Rajdhani', weight: 'bold' },
                                 color: '#E0E0E0'
                             },
                             ticks: {
-                                display: false, // Hide numeric ticks
+                                display: false,
                                 beginAtZero: true,
                                 max: 10,
-                                color: '#0A0A10', // Text color for ticks
-                                backdropColor: 'rgba(224, 224, 224, 0.8)', // Background behind ticks
-                                backdropPadding: 4,
+                                color: '#E0E0E0', /* Text color for ticks */
+                                backdropColor: 'rgba(26, 26, 40, 0.8)', /* Darker backdrop for ticks */
+                                backdropPadding: 6,
                                 borderRadius: 4,
                             }
                         }
@@ -399,7 +645,7 @@
                         legend: {
                             labels: {
                                 color: '#E0E0E0',
-                                font: { size: 16, family: 'Orbitron' }
+                                font: { size: 18, family: 'Orbitron' }
                             }
                         },
                         tooltip: {
@@ -407,8 +653,18 @@
                                 label: function(context) {
                                     return context.dataset.label + ': ' + context.raw + '/10';
                                 }
-                            }
+                            },
+                            backgroundColor: 'rgba(0, 170, 255, 0.8)', /* Neon blue tooltip background */
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#FFFFFF',
+                            borderColor: '#ff00ff',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            displayColors: false,
                         }
+                    },
+                    elements: {
+                        line: { tension: 0.1 } /* Smooth radar lines */
                     }
                 }
             });
@@ -420,7 +676,6 @@
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    // Adjust offset based on header height
                     if (pageYOffset >= sectionTop - 100) { 
                         current = section.getAttribute('id');
                     }
