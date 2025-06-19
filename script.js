@@ -1,203 +1,264 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+const appData = {
+    expertise: [
+        {
+            title: 'Flutter & Dart',
+            icon: '📱',
+            summary: 'Building high-performance, visually stunning cross-platform mobile and web applications.',
+            details: 'Deep expertise in Dart and Flutter framework, focusing on widget-based UI development, state management (Provider, Bloc), and platform-specific integrations for Android, iOS, and web.'
+        },
+        {
+            title: 'UI/UX Design',
+            icon: '✨',
+            summary: 'Crafting intuitive and engaging user interfaces with a keen eye for modern design principles.',
+            details: 'Proficient in creating seamless user experiences, from wireframing and prototyping to implementing polished, responsive designs that prioritize usability and aesthetic appeal.'
+        },
+        {
+            title: 'Backend Development',
+            icon: '💾',
+            summary: 'Developing robust server-side logic and APIs using Node.js and Express.js for scalable applications.',
+            details: 'Skilled in designing and implementing RESTful APIs, managing databases (MongoDB, PostgreSQL), and ensuring efficient data flow between frontend and backend services.'
+        },
+        {
+            title: 'Database Management',
+            icon: '🗄️',
+            summary: 'Designing and managing efficient databases for structured and unstructured data storage.',
+            details: 'Experience with both NoSQL (MongoDB, Firebase Firestore) and SQL (PostgreSQL) databases, including schema design, querying, and optimization for performance.'
+        },
+        {
+            title: 'State Management',
+            icon: '📊',
+            summary: 'Implementing scalable and maintainable state management solutions for complex applications.',
+            details: 'Strong understanding and practical application of various state management patterns and libraries in Flutter (Provider, Bloc/Cubit) and web frameworks (React Context, Redux).'
+        },
+        {
+            title: 'Cloud Services',
+            icon: '☁️',
+            summary: 'Leveraging cloud platforms like Firebase for backend services, authentication, and real-time data.',
+            details: 'Proficient in utilizing Firebase for authentication, Firestore for real-time database, Cloud Functions for serverless logic, and Storage for media assets, enabling rapid application deployment.'
         }
-    });
-});
-
-// Mobile menu toggle
-const mobileMenu = document.querySelector('.mobile-menu');
-const navLinks = document.querySelector('.nav-links');
-
-mobileMenu.addEventListener('click', () => {
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-});
-
-// Add scroll effect to header
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.98)';
-    } else {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-    }
-});
-
-// Animate elements on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    ],
+    projects: [
+        {
+            category: 'Mobile',
+            title: 'E-commerce Mobile App',
+            image: 'https://placehold.co/400x300/100A1A/ff00ff?text=E-commerce+App',
+            description: 'A cross-platform e-commerce mobile application built with Flutter, featuring product listings, secure payment gateways, and robust user authentication. Focus on performance and smooth UX.',
+            tech: ['Flutter', 'Firebase', 'Bloc']
+        },
+        {
+            category: 'Mobile',
+            title: 'Recipe Sharing App',
+            image: 'https://placehold.co/400x300/100A1A/00aaff?text=Recipe+App',
+            description: 'An interactive mobile application for culinary enthusiasts to share and discover recipes, complete with user profiles, search, and a favorites system. Utilizes Flutter for a vibrant UI.',
+            tech: ['Flutter', 'Node.js', 'PostgreSQL']
+        },
+        {
+            category: 'Web',
+            title: 'Portfolio Website (React)',
+            image: 'https://placehold.co/400x300/100A1A/ffff00?text=Web+Portfolio',
+            description: 'A personal portfolio website showcasing projects and skills, built with React and Tailwind CSS. Designed for responsiveness and modern aesthetics.',
+            tech: ['React.js', 'Tailwind CSS', 'JavaScript']
+        },
+        {
+            category: 'Mobile',
+            title: 'Fitness Tracker App',
+            image: 'https://placehold.co/400x300/100A1A/00ff00?text=Fitness+Tracker',
+            description: 'A comprehensive mobile fitness tracking application enabling users to log workouts, visualize progress, and set reminders. Features intuitive data visualization.',
+            tech: ['Flutter', 'Provider', 'SQFlite']
+        },
+        {
+            category: 'UI/UX Concept',
+            title: 'Smart Home Dashboard',
+            image: 'https://placehold.co/400x300/100A1A/ff00ff?text=Smart+Home+UI',
+            description: 'UI/UX concept and prototype for a smart home management dashboard, focusing on clean design and easy control of various devices. Designed with a futuristic aesthetic.',
+            tech: ['Figma', 'Prototyping', 'UI/UX']
+        },
+         {
+            category: 'Open Source',
+            title: 'Flutter Utility Package',
+            image: 'https://placehold.co/400x300/100A1A/00ff00?text=Utility+Lib',
+            description: 'A lightweight open-source Flutter package providing common utility functions and custom widgets to accelerate development workflows.',
+            tech: ['Flutter', 'Dart', 'Open Source']
+        }
+    ],
+    experience: [
+        {
+            type: 'Work',
+            title: 'Mobile Developer',
+            company: 'Tech Solutions Inc.',
+            duration: 'Jan 2023 - Present',
+            description: 'Developed and maintained cross-platform mobile applications using Flutter. Collaborated on feature development, bug fixing, and performance optimization for key client projects.'
+        },
+        {
+            type: 'Work',
+            title: 'Frontend Developer Intern',
+            company: 'Web Innovators Co.',
+            duration: 'June 2022 - Dec 2022',
+            description: 'Assisted in building responsive web interfaces using React and modern JavaScript. Gained hands-on experience with component-based architecture and API integration.'
+        },
+        {
+            type: 'Education',
+            title: 'B.Sc. in Computer Science',
+            institution: 'University of Technology Jakarta',
+            duration: '2019 - 2023',
+            description: 'Graduated with honors, specializing in Software Engineering and Mobile Application Development. Completed a capstone project on AI-powered mobile recommendation systems.'
+        }
+    ]
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-        }
-    });
-}, observerOptions);
-
-// Observe all cards and sections
-document.querySelectorAll('.skill-card, .project-card, .contact-card, .about-content').forEach(el => {
-    observer.observe(el);
-});
-
-// Enhanced mobile menu functionality
-function toggleMobileMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    const bars = document.querySelectorAll('.bar');
-    
-    navLinks.classList.toggle('active');
-    
-    // Animate hamburger bars
-    bars[0].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(-5px, 6px)' : '';
-    bars[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
-    bars[2].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(-5px, -6px)' : '';
-}
-
-// Update mobile menu event listener
-mobileMenu.removeEventListener('click', () => {}); // Remove previous listener
-mobileMenu.addEventListener('click', toggleMobileMenu);
-
-// Close mobile menu when clicking on links
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        const navLinks = document.querySelector('.nav-links');
-        const bars = document.querySelectorAll('.bar');
-        
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            bars[0].style.transform = '';
-            bars[1].style.opacity = '1';
-            bars[2].style.transform = '';
-        }
-    });
-});
-
-// Add typing effect to hero text (optional enhancement)
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Initialize typing effect when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.querySelector('.hero h1');
-    const originalText = heroTitle.textContent;
-    
-    // Add a small delay before starting the typing effect
-    setTimeout(() => {
-        typeWriter(heroTitle, originalText, 150);
-    }, 500);
-});
-
-// Add scroll progress indicator
-function createScrollIndicator() {
-    const progressBar = document.createElement('div');
-    progressBar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 3px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        z-index: 9999;
-        transition: width 0.3s ease;
-    `;
-    document.body.appendChild(progressBar);
-    
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.offsetHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        progressBar.style.width = scrollPercent + '%';
+    // Expertise Section
+    const expertiseGrid = document.getElementById('expertise-grid');
+    appData.expertise.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'glass-pane p-6 rounded-lg shadow-lg cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-pink-500';
+        card.innerHTML = `
+            <div class="text-4xl mb-4">${item.icon}</div>
+            <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
+            <p class="text-gray-400 font-medium">${item.summary}</p>
+            <div class="details hidden mt-4 text-gray-300 transition-all duration-500">
+                <p>${item.details}</p>
+            </div>
+        `;
+        expertiseGrid.appendChild(card);
+        card.addEventListener('click', () => {
+            const details = card.querySelector('.details');
+            details.classList.toggle('hidden');
+        });
     });
-}
 
-// Initialize scroll indicator
-createScrollIndicator();
-
-// Add active navigation highlighting
-function highlightActiveSection() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    // Projects Section
+    const projectFiltersContainer = document.getElementById('project-filters');
+    const projectGallery = document.getElementById('project-gallery');
+    const categories = ['All', ...new Set(appData.projects.map(p => p.category))];
     
+    categories.forEach(cat => {
+        const button = document.createElement('button');
+        button.textContent = cat;
+        button.className = 'project-filter-btn px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 border-2 border-blue-500 hover:bg-blue-500 hover:text-white';
+        if(cat === 'All') button.classList.add('bg-blue-500', 'text-white');
+        projectFiltersContainer.appendChild(button);
+    });
+
+    const renderGallery = (filter) => {
+        projectGallery.innerHTML = '';
+        const filteredProjects = filter === 'All' ? appData.projects : appData.projects.filter(p => p.category === filter);
+        filteredProjects.forEach(item => {
+            const techTags = item.tech.map(t => `<span class="bg-blue-700 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full">${t}</span>`).join('');
+            const card = document.createElement('div');
+            card.className = 'glass-pane rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105';
+            card.innerHTML = `
+                <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">${item.title}</h3>
+                    <p class="text-gray-400">${item.description}</p>
+                    <div class="flex flex-wrap gap-2 mt-4">${techTags}</div>
+                </div>
+            `;
+            projectGallery.appendChild(card);
+        });
+    };
+
+    projectFiltersContainer.addEventListener('click', (e) => {
+        if(e.target.classList.contains('project-filter-btn')) {
+            document.querySelectorAll('.project-filter-btn').forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+            e.target.classList.add('bg-blue-500', 'text-white');
+            renderGallery(e.target.textContent);
+        }
+    });
+
+    renderGallery('All');
+
+    // Experience Section
+    const experienceGrid = document.getElementById('experience-grid');
+    appData.experience.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'glass-pane p-6 rounded-lg shadow-lg';
+        card.innerHTML = `
+            <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
+            <p class="text-lg font-semibold text-pink-400">${item.company || item.institution}</p>
+            <p class="text-gray-400">${item.duration}</p>
+            <p class="mt-4 text-gray-300">${item.description}</p>
+        `;
+        experienceGrid.appendChild(card);
+    });
+    
+    // Proficiency Radar Chart
+    const radarCtx = document.getElementById('proficiencyRadarChart').getContext('2d');
+    const proficiencyRadarData = {
+        labels: ['Flutter Development', 'UI/UX Design', 'Backend Development', 'Database Management', 'Cloud Services', 'Code Optimization'],
+        datasets: [
+            {
+                label: 'Ahmad Alfaroki\'s Proficiency',
+                data: [9, 8, 7, 8, 7, 9], // Example data: Scale 1-10
+                backgroundColor: 'rgba(0, 170, 255, 0.2)', // Blue
+                borderColor: '#00aaff',
+                pointBackgroundColor: '#00aaff',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#00aaff',
+            }
+        ]
+    };
+    new Chart(radarCtx, {
+        type: 'radar',
+        data: proficiencyRadarData,
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                    grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                    pointLabels: {
+                        font: { size: 14, family: 'Rajdhani', weight: 'bold' },
+                        color: '#E0E0E0'
+                    },
+                    ticks: {
+                        display: false, // Hide numeric ticks
+                        beginAtZero: true,
+                        max: 10,
+                        color: '#0A0A10', // Text color for ticks
+                        backdropColor: 'rgba(224, 224, 224, 0.8)', // Background behind ticks
+                        backdropPadding: 4,
+                        borderRadius: 4,
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#E0E0E0',
+                        font: { size: 16, family: 'Orbitron' }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.raw + '/10';
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Smooth scroll active nav link highlighting
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
     window.addEventListener('scroll', () => {
         let current = '';
-        
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
-            if (window.pageYOffset >= sectionTop - 200) {
+            // Adjust offset based on header height
+            if (pageYOffset >= sectionTop - 100) { 
                 current = section.getAttribute('id');
             }
         });
-        
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            if (link.getAttribute('href').substring(1) === current) {
                 link.classList.add('active');
             }
         });
     });
-}
-
-// Initialize active section highlighting
-highlightActiveSection();
-
-// Add CSS for active nav links
-const style = document.createElement('style');
-style.textContent = `
-    .nav-links a.active {
-        color: #667eea;
-        font-weight: 600;
-    }
-    
-    @media (max-width: 768px) {
-        .nav-links {
-            position: fixed;
-            top: 70px;
-            right: -100%;
-            width: 100%;
-            height: calc(100vh - 70px);
-            background: rgba(255, 255, 255, 0.98);
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 2rem;
-            transition: right 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-links.active {
-            right: 0;
-        }
-        
-        .nav-links li {
-            margin: 1rem 0;
-        }
-        
-        .nav-links a {
-            font-size: 1.2rem;
-        }
-    }
-`;
-document.head.appendChild(style);
+});
