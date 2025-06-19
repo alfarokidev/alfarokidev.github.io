@@ -6,15 +6,44 @@
     <title>Ahmad Alfaroki - Futuristic Portfolio</title>
     <!-- Chosen Palette: Cybernetic Neon -->
     <!-- Application Structure Plan: A tab-based SPA design is used to present the portfolio. The structure includes: 1) A dynamic Hero section for introduction. 2) A "My Expertise" section with interactive cards for core skills. 3) A "Technical Proficiency Matrix" using a radar chart for skill level comparison. 4) A filterable "Featured Projects" gallery to showcase work. 5) An "Experience & Education" section for professional background. 6) A "Contact" section with direct links. This structure prioritizes user-driven discovery, allowing visitors to explore specific areas of the portfolio easily and visually engage with information. -->
-    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Core Skills -> Inform/Organize -> Interactive Cards -> Click-to-expand -> Breaks down skill areas with details. 2) Skill Levels -> Compare -> Chart.js Radar Chart -> Hover for details -> Visually compares proficiency across multiple technical dimensions. 3) Projects -> Organize/Inform -> Filterable Gallery -> Click to filter -> Allows users to focus on specific project types. 4) Experience & Education -> Inform -> Cards -> Provides structured professional and academic background. This approach translates resume content into dynamic, engaging components. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Core Skills -> Inform/Organize -> Interactive Cards -> Click-to-expand -> Breaks down skill areas with details. 2) Skill Levels -> Compare -> Chart.js Radar Chart -> Hover for details -> Visually compares proficiency across multiple technical dimensions. 3) Projects -> Organize/Inform -> Filterable Gallery -> Click to filter -> Allows users to focus on specific project types. 4) Experience & Education -> Inform -> Cards -> Provides structured professional and academic background. This approach translates traditional resume content into dynamic, engaging components. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #0A0A10;
+            color: #E0E0E0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
+        .neon-text-blue { text-shadow: 0 0 5px #00aaff, 0 0 10px #00aaff, 0 0 20px #00aaff, 0 0 40px #00aaff; }
+        .neon-text-pink { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+        .neon-border { border: 1px solid; border-image: linear-gradient(to right, #00aaff, #ff00ff) 1; }
+        .glass-pane { background: rgba(16, 16, 32, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(0, 170, 255, 0.2); }
+        .nav-link { position: relative; padding: 0.5rem 0; overflow: hidden; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, #00aaff, #ff00ff); transform: translateX(-101%); transition: transform 0.3s ease; }
+        .nav-link.active::after, .nav-link:hover::after { transform: translateX(0); }
+        .animated-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(45deg, #0A0A10, #100A1A); overflow: hidden; }
+        .animated-bg div { position: absolute; display: block; width: 20px; height: 20px; background: rgba(0, 170, 255, 0.2); bottom: -150px; animation: animate-bg 25s linear infinite; }
+        .animated-bg div:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .animated-bg div:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .animated-bg div:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .animated-bg div:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .animated-bg div:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .animated-bg div:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(255, 0, 255, 0.2); }
+        @keyframes animate-bg { 0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; } 100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; } }
+        .chart-container { position: relative; width: 100%; max-width: 700px; height: 350px; margin: auto; }
+        @media (min-width: 768px) { .chart-container { height: 500px; } }
+        .glitch { animation: glitch 1.5s linear infinite; }
+        @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
+        .glitch-2 { animation: glitch-2 1.5s linear infinite; animation-delay: -0.75s; }
+        @keyframes glitch-2 { 2%, 64% { transform: translate(0, 2px); } 4%, 60% { transform: translate(0, -2px); } 62% { transform: translate(0, 0) skew(-5deg); } }
+    </style>
 </head>
 <body class="antialiased">
 
@@ -139,7 +168,271 @@
         </div>
     </footer>
     
-    <!-- Link to external JavaScript file -->
-    <script src="script.js"></script>
+    <script>
+        const appData = {
+            expertise: [
+                {
+                    title: 'Flutter & Dart',
+                    icon: '📱',
+                    summary: 'Building high-performance, visually stunning cross-platform mobile and web applications.',
+                    details: 'Deep expertise in Dart and Flutter framework, focusing on widget-based UI development, state management (Provider, Bloc), and platform-specific integrations for Android, iOS, and web.'
+                },
+                {
+                    title: 'UI/UX Design',
+                    icon: '✨',
+                    summary: 'Crafting intuitive and engaging user interfaces with a keen eye for modern design principles.',
+                    details: 'Proficient in creating seamless user experiences, from wireframing and prototyping to implementing polished, responsive designs that prioritize usability and aesthetic appeal.'
+                },
+                {
+                    title: 'Backend Development',
+                    icon: '💾',
+                    summary: 'Developing robust server-side logic and APIs using Node.js and Express.js for scalable applications.',
+                    details: 'Skilled in designing and implementing RESTful APIs, managing databases (MongoDB, PostgreSQL), and ensuring efficient data flow between frontend and backend services.'
+                },
+                {
+                    title: 'Database Management',
+                    icon: '🗄️',
+                    summary: 'Designing and managing efficient databases for structured and unstructured data storage.',
+                    details: 'Experience with both NoSQL (MongoDB, Firebase Firestore) and SQL (PostgreSQL) databases, including schema design, querying, and optimization for performance.'
+                },
+                {
+                    title: 'State Management',
+                    icon: '📊',
+                    summary: 'Implementing scalable and maintainable state management solutions for complex applications.',
+                    details: 'Strong understanding and practical application of various state management patterns and libraries in Flutter (Provider, Bloc/Cubit) and web frameworks (React Context, Redux).'
+                },
+                {
+                    title: 'Cloud Services',
+                    icon: '☁️',
+                    summary: 'Leveraging cloud platforms like Firebase for backend services, authentication, and real-time data.',
+                    details: 'Proficient in utilizing Firebase for authentication, Firestore for real-time database, Cloud Functions for serverless logic, and Storage for media assets, enabling rapid application deployment.'
+                }
+            ],
+            projects: [
+                {
+                    category: 'Mobile',
+                    title: 'E-commerce Mobile App',
+                    image: 'https://placehold.co/400x300/100A1A/ff00ff?text=E-commerce+App',
+                    description: 'A cross-platform e-commerce mobile application built with Flutter, featuring product listings, secure payment gateways, and robust user authentication. Focus on performance and smooth UX.',
+                    tech: ['Flutter', 'Firebase', 'Bloc']
+                },
+                {
+                    category: 'Mobile',
+                    title: 'Recipe Sharing App',
+                    image: 'https://placehold.co/400x300/100A1A/00aaff?text=Recipe+App',
+                    description: 'An interactive mobile application for culinary enthusiasts to share and discover recipes, complete with user profiles, search, and a favorites system. Utilizes Flutter for a vibrant UI.',
+                    tech: ['Flutter', 'Node.js', 'PostgreSQL']
+                },
+                {
+                    category: 'Web',
+                    title: 'Portfolio Website (React)',
+                    image: 'https://placehold.co/400x300/100A1A/ffff00?text=Web+Portfolio',
+                    description: 'A personal portfolio website showcasing projects and skills, built with React and Tailwind CSS. Designed for responsiveness and modern aesthetics.',
+                    tech: ['React.js', 'Tailwind CSS', 'JavaScript']
+                },
+                {
+                    category: 'Mobile',
+                    title: 'Fitness Tracker App',
+                    image: 'https://placehold.co/400x300/100A1A/00ff00?text=Fitness+Tracker',
+                    description: 'A comprehensive mobile fitness tracking application enabling users to log workouts, visualize progress, and set reminders. Features intuitive data visualization.',
+                    tech: ['Flutter', 'Provider', 'SQFlite']
+                },
+                {
+                    category: 'UI/UX Concept',
+                    title: 'Smart Home Dashboard',
+                    image: 'https://placehold.co/400x300/100A1A/ff00ff?text=Smart+Home+UI',
+                    description: 'UI/UX concept and prototype for a smart home management dashboard, focusing on clean design and easy control of various devices. Designed with a futuristic aesthetic.',
+                    tech: ['Figma', 'Prototyping', 'UI/UX']
+                },
+                 {
+                    category: 'Open Source',
+                    title: 'Flutter Utility Package',
+                    image: 'https://placehold.co/400x300/100A1A/00ff00?text=Utility+Lib',
+                    description: 'A lightweight open-source Flutter package providing common utility functions and custom widgets to accelerate development workflows.',
+                    tech: ['Flutter', 'Dart', 'Open Source']
+                }
+            ],
+            experience: [
+                {
+                    type: 'Work',
+                    title: 'Mobile Developer',
+                    company: 'Tech Solutions Inc.',
+                    duration: 'Jan 2023 - Present',
+                    description: 'Developed and maintained cross-platform mobile applications using Flutter. Collaborated on feature development, bug fixing, and performance optimization for key client projects.'
+                },
+                {
+                    type: 'Work',
+                    title: 'Frontend Developer Intern',
+                    company: 'Web Innovators Co.',
+                    duration: 'June 2022 - Dec 2022',
+                    description: 'Assisted in building responsive web interfaces using React and modern JavaScript. Gained hands-on experience with component-based architecture and API integration.'
+                },
+                {
+                    type: 'Education',
+                    title: 'B.Sc. in Computer Science',
+                    institution: 'University of Technology Jakarta',
+                    duration: '2019 - 2023',
+                    description: 'Graduated with honors, specializing in Software Engineering and Mobile Application Development. Completed a capstone project on AI-powered mobile recommendation systems.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Expertise Section
+            const expertiseGrid = document.getElementById('expertise-grid');
+            appData.expertise.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-pane p-6 rounded-lg shadow-lg cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-pink-500';
+                card.innerHTML = `
+                    <div class="text-4xl mb-4">${item.icon}</div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
+                    <p class="text-gray-400 font-medium">${item.summary}</p>
+                    <div class="details hidden mt-4 text-gray-300 transition-all duration-500">
+                        <p>${item.details}</p>
+                    </div>
+                `;
+                expertiseGrid.appendChild(card);
+                card.addEventListener('click', () => {
+                    const details = card.querySelector('.details');
+                    details.classList.toggle('hidden');
+                });
+            });
+
+            // Projects Section
+            const projectFiltersContainer = document.getElementById('project-filters');
+            const projectGallery = document.getElementById('project-gallery');
+            const categories = ['All', ...new Set(appData.projects.map(p => p.category))];
+            
+            categories.forEach(cat => {
+                const button = document.createElement('button');
+                button.textContent = cat;
+                button.className = 'project-filter-btn px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 border-2 border-blue-500 hover:bg-blue-500 hover:text-white';
+                if(cat === 'All') button.classList.add('bg-blue-500', 'text-white');
+                projectFiltersContainer.appendChild(button);
+            });
+
+            const renderGallery = (filter) => {
+                projectGallery.innerHTML = '';
+                const filteredProjects = filter === 'All' ? appData.projects : appData.projects.filter(p => p.category === filter);
+                filteredProjects.forEach(item => {
+                    const techTags = item.tech.map(t => `<span class="bg-blue-700 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full">${t}</span>`).join('');
+                    const card = document.createElement('div');
+                    card.className = 'glass-pane rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105';
+                    card.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${item.title}</h3>
+                            <p class="text-gray-400">${item.description}</p>
+                            <div class="flex flex-wrap gap-2 mt-4">${techTags}</div>
+                        </div>
+                    `;
+                    projectGallery.appendChild(card);
+                });
+            };
+
+            projectFiltersContainer.addEventListener('click', (e) => {
+                if(e.target.classList.contains('project-filter-btn')) {
+                    document.querySelectorAll('.project-filter-btn').forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+                    e.target.classList.add('bg-blue-500', 'text-white');
+                    renderGallery(e.target.textContent);
+                }
+            });
+
+            renderGallery('All');
+
+            // Experience Section
+            const experienceGrid = document.getElementById('experience-grid');
+            appData.experience.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-pane p-6 rounded-lg shadow-lg';
+                card.innerHTML = `
+                    <h3 class="text-2xl font-bold mb-2 text-white">${item.title}</h3>
+                    <p class="text-lg font-semibold text-pink-400">${item.company || item.institution}</p>
+                    <p class="text-gray-400">${item.duration}</p>
+                    <p class="mt-4 text-gray-300">${item.description}</p>
+                `;
+                experienceGrid.appendChild(card);
+            });
+            
+            // Proficiency Radar Chart
+            const radarCtx = document.getElementById('proficiencyRadarChart').getContext('2d');
+            const proficiencyRadarData = {
+                labels: ['Flutter Development', 'UI/UX Design', 'Backend Development', 'Database Management', 'Cloud Services', 'Code Optimization'],
+                datasets: [
+                    {
+                        label: 'Ahmad Alfaroki\'s Proficiency',
+                        data: [9, 8, 7, 8, 7, 9], // Example data: Scale 1-10
+                        backgroundColor: 'rgba(0, 170, 255, 0.2)', // Blue
+                        borderColor: '#00aaff',
+                        pointBackgroundColor: '#00aaff',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#00aaff',
+                    }
+                ]
+            };
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: proficiencyRadarData,
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                            pointLabels: {
+                                font: { size: 14, family: 'Rajdhani', weight: 'bold' },
+                                color: '#E0E0E0'
+                            },
+                            ticks: {
+                                display: false, // Hide numeric ticks
+                                beginAtZero: true,
+                                max: 10,
+                                color: '#0A0A10', // Text color for ticks
+                                backdropColor: 'rgba(224, 224, 224, 0.8)', // Background behind ticks
+                                backdropPadding: 4,
+                                borderRadius: 4,
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#E0E0E0',
+                                font: { size: 16, family: 'Orbitron' }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw + '/10';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Smooth scroll active nav link highlighting
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    // Adjust offset based on header height
+                    if (pageYOffset >= sectionTop - 100) { 
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
