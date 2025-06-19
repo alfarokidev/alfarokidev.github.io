@@ -1,180 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Alfaroki - Flutter Mobile Developer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Ahmad Alfaroki - Futuristic Portfolio</title>
+    <!-- Chosen Palette: Cybernetic Neon -->
+    <!-- Application Structure Plan: A tab-based SPA design is used to present the portfolio. The structure includes: 1) A dynamic Hero section for introduction. 2) A "My Expertise" section with interactive cards for core skills. 3) A "Technical Proficiency Matrix" using a radar chart for skill level comparison. 4) A filterable "Featured Projects" gallery to showcase work. 5) An "Experience & Education" section for professional background. 6) A "Contact" section with direct links. This structure prioritizes user-driven discovery, allowing visitors to explore specific areas of the portfolio easily and visually engage with information. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Core Skills -> Inform/Organize -> Interactive Cards -> Click-to-expand -> Breaks down skill areas with details. 2) Skill Levels -> Compare -> Chart.js Radar Chart -> Hover for details -> Visually compares proficiency across multiple technical dimensions. 3) Projects -> Organize/Inform -> Filterable Gallery -> Click to filter -> Allows users to focus on specific project types. 4) Experience & Education -> Inform -> Cards -> Provides structured professional and academic background. This approach translates resume content into dynamic, engaging components. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">Ahmad Alfaroki</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </nav>
+<body class="antialiased">
+
+    <header id="header" class="glass-pane fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <div class="text-2xl font-bold uppercase tracking-widest text-white">
+                    <a href="#hero" class="glitch">AHMAD</a><a href="#hero" class="glitch-2">ALFAROKI</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#expertise" class="nav-link text-lg font-semibold tracking-wider">Expertise</a>
+                    <a href="#proficiency" class="nav-link text-lg font-semibold tracking-wider">Proficiency</a>
+                    <a href="#projects" class="nav-link text-lg font-semibold tracking-wider">Projects</a>
+                    <a href="#experience" class="nav-link text-lg font-semibold tracking-wider">Experience</a>
+                    <a href="#contact" class="nav-link text-lg font-semibold tracking-wider">Contact</a>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="floating-flutter"></div>
-        <div class="floating-flutter"></div>
-        <div class="floating-flutter"></div>
-        <div class="hero-content">
-            <h1>Ahmad Alfaroki</h1>
-            <p>Flutter Mobile Developer</p>
-            <p>Creating beautiful, performant mobile applications with Flutter</p>
-            <a href="#contact" class="cta-button">Get In Touch</a>
-        </div>
-    </section>
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="animated-bg">
+                <div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div class="text-center p-4 z-10">
+                <h1 class="text-4xl md:text-7xl font-black uppercase text-white mb-4">
+                    <span class="neon-text-blue">Ahmad</span>
+                    <span class="block neon-text-pink mt-2">Alfaroki</span>
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+                    A dedicated Flutter Developer, crafting robust and intuitive mobile experiences that bridge innovation with user-centric design.
+                </p>
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="section-white">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="profile-image">
-                  <img src="https://i.postimg.cc/XJQkh1vQ/Whats-App-Image-2025-06-19-at-22-01-36-861125e1.jpg" alt="Profile"/>
+        <section id="expertise" class="py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-blue">My Expertise</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">Delving into the core capabilities that drive my development process. Click on each area to understand the depth of my skills.</p>
                 </div>
-                <div class="about-text">
-                    <h3>Flutter Mobile Developer</h3>
-                    <p>I'm a passionate Flutter developer with expertise in creating cross-platform mobile applications. I love turning ideas into beautiful, functional apps that provide exceptional user experiences.</p>
-                    <p>With a strong foundation in Dart programming and Flutter framework, I specialize in building scalable, maintainable mobile applications that work seamlessly across iOS and Android platforms.</p>
-                    <p>I'm constantly learning and staying up-to-date with the latest Flutter developments and mobile app trends to deliver cutting-edge solutions.</p>
+                <div id="expertise-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Expertise cards will be injected here by JS -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section-gray">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">📱</div>
-                    <h4>Flutter Development</h4>
-                    <p>Expert in Flutter framework for cross-platform mobile development</p>
+        <section id="proficiency" class="py-20 md:py-32 bg-black bg-opacity-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-pink">Technical Proficiency Matrix</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">A visual representation of my core technical strengths across various development domains. Each point reflects my proficiency and comfort level.</p>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🎯</div>
-                    <h4>Dart Programming</h4>
-                    <p>Proficient in Dart language and object-oriented programming concepts</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔄</div>
-                    <h4>State Management</h4>
-                    <p>Experience with Provider, Bloc, Riverpod, and GetX</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🌐</div>
-                    <h4>API Integration</h4>
-                    <p>REST APIs, GraphQL, and real-time data synchronization</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">💾</div>
-                    <h4>Local Storage</h4>
-                    <p>SQLite, Hive, SharedPreferences, and local database management</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h4>UI/UX Design</h4>
-                    <p>Material Design, Cupertino, and custom widget development</p>
+                <div class="chart-container">
+                    <canvas id="proficiencyRadarChart"></canvas>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section-white">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">🛒</div>
-                    <div class="project-content">
-                        <h4>E-Commerce Mobile App</h4>
-                        <p>A full-featured e-commerce application with cart management, payment integration, and user authentication.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
+        <section id="projects" class="py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-blue">Featured Projects</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">Explore a selection of my work, demonstrating diverse applications of Flutter and other technologies. Filter by project type to focus on areas of interest.</p>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">📊</div>
-                    <div class="project-content">
-                        <h4>Task Management App</h4>
-                        <p>Productivity app with task tracking, calendar integration, and team collaboration features.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">SQLite</span>
-                            <span class="tech-tag">Bloc</span>
-                        </div>
-                    </div>
+                <div id="project-filters" class="flex justify-center flex-wrap gap-4 mb-12">
+                    <!-- Project filter buttons will be injected here by JS -->
                 </div>
-                <div class="project-card">
-                    <div class="project-image">💬</div>
-                    <div class="project-content">
-                        <h4>Chat Application</h4>
-                        <p>Real-time messaging app with multimedia sharing, group chats, and push notifications.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">Socket.IO</span>
-                            <span class="tech-tag">FCM</span>
+                <div id="project-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Project cards will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 md:py-32 bg-black bg-opacity-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-pink">Experience & Education</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">My journey through professional roles and academic pursuits, showcasing the foundations of my development career.</p>
+                </div>
+                <div id="experience-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Experience/Education cards will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold uppercase neon-text-blue">Connect with Me</h2>
+                    <p class="mt-4 text-lg max-w-2xl mx-auto text-gray-400">Ready to build something amazing together? Reach out using the channels below.</p>
+                </div>
+                <div class="max-w-xl mx-auto glass-pane rounded-xl shadow-2xl p-8 md:p-14 text-center">
+                    <div class="space-y-6">
+                        <p class="text-xl text-gray-300">I'm available for new projects and collaborations. Feel free to send a message or connect directly!</p>
+                        <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-10">
+                            <a href="mailto:alfarouq@gmx.com" class="flex items-center space-x-3 text-blue-400 hover:text-blue-300 transition-colors duration-200">
+                                <!-- Email Icon -->
+                                <span class="text-3xl">📧</span>
+                                <span class="text-lg font-semibold">alfarouq@gmx.com</span>
+                            </a>
+                            <a href="https://wa.me/6285187203639" target="_blank" class="flex items-center space-x-3 text-green-400 hover:text-green-300 transition-colors duration-200">
+                                <!-- WhatsApp Icon -->
+                                <span class="text-3xl">💬</span>
+                                <span class="text-lg font-semibold">+62 851 8720 3639</span>
+                            </a>
+                        </div>
+                        <div class="mt-8">
+                            <a href="#" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors duration-200 block text-lg font-semibold">🔗 My GitHub Profile</a>
+                            <a href="#" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors duration-200 block text-lg font-semibold mt-2">🔗 My LinkedIn Profile</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section-gray">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
-                Ready to bring your mobile app idea to life? Let's discuss your project!
-            </p>
-            <div class="contact-content">
-                <div class="contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h4>Email</h4>
-                    <a href="mailto:alfarouq@gmx.com">alfarouq@gmx.com</a>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">📱</div>
-                    <h4>WhatsApp</h4>
-                    <a href="https://wa.me/6285187203639">+62 851 8720 3639</a>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">💼</div>
-                    <h4>Available for</h4>
-                    <p>Freelance Projects<br>Full-time Opportunities</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Ahmad Alfaroki. All rights reserved. | Flutter Mobile Developer</p>
+    <footer class="py-8 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>Built with Futuristic Vision by Ahmad Alfaroki &copy; 2025.</p>
         </div>
     </footer>
-
+    
+    <!-- Link to external JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
