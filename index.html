@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Alfaroki - Ultra Futuristic Portfolio with Avatar</title>
+    <title>Ahmad Alfaroki</title>
     <!-- Chosen Palette: Cybernetic Neon 3.0 -->
-    <!-- Application Structure Plan: The SPA maintains its tab-based, non-linear design for user-driven exploration. Enhancements focus on dynamic interactions: 1) A Hero section with a prominent typewriter effect, subtle text glow for an AI-narrated feel, and a new glowing avatar. 2) "My Expertise" cards now feature a "holographic" flip effect with content reveal. 3) The "Technical Proficiency Matrix" chart animates its data lines on load, visually simulating data acquisition. 4) "Featured Projects" gallery has more vibrant hover effects on cards and pulsing active filters. 5) "Experience & Education" is presented as an animated timeline. 6) "Connect" section uses futuristic input fields and animated contact icons. This structure is designed to maximize visual engagement and create a highly immersive, futuristic user journey. -->
-    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Hero Tagline -> Inform -> Typewriter + Glow Animation -> Sets interactive, tech-driven tone immediately. New Avatar -> Visual Identity -> Pulsing glow + Stylized image -> Personalizes the futuristic theme. 2) Core Skills -> Inform/Organize -> Interactive Flip Cards with Holographic Reveal -> Deeper engagement; reveals details dynamically. 3) Skill Levels -> Compare -> Chart.js Radar Chart with Load Animation -> Visually compelling data comparison, simulates "system boot-up." 4) Projects -> Organize/Inform -> Filterable Gallery with Enhanced Card Hovers -> Improved navigation and visual feedback. 5) Experience & Education -> Inform/Sequence -> Animated Timeline with Glowing Nodes -> Presents chronological data engagingly, with clear milestones. This comprehensive approach uses tailored interactions and animations to amplify the futuristic theme across all content types. -->
+    <!-- Application Structure Plan: The SPA maintains its tab-based, non-linear design for user-driven exploration. Enhancements focus on dynamic interactions: 1) A Hero section with a prominent typewriter effect, subtle text glow for an AI-narrated feel, a glowing avatar, an interactive 3D element, an enhanced animated background, and now an advanced dynamic grid overlay. 2) "My Expertise" cards now feature a "holographic" flip effect with content reveal. 3) The "Technical Proficiency Matrix" chart animates its data lines on load, visually simulating data acquisition. 4) "Featured Projects" gallery has more vibrant hover effects on cards and pulsing active filters. 5) "Experience & Education" is presented as an animated timeline. 6) "Connect" section uses futuristic input fields and animated contact icons. This structure is designed to maximize visual engagement and create a highly immersive, futuristic user journey. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1) Hero Tagline -> Inform -> Typewriter + Glow Animation -> Sets interactive, tech-driven tone immediately. New Avatar -> Visual Identity -> Pulsing glow + Stylized image -> Personalizes the futuristic theme. 3D Element -> Visual Interest/Dynamic -> Spinning cube with glow -> Adds depth and advanced tech feel. Enhanced Animated Background -> Atmosphere/Immersion -> Digital flow/particle effect -> Deepens futuristic environment. Interactive Cursor Trail -> User Feedback/Immersion -> Glowing trail -> Constant subtle interaction. Section Transitions -> Immersion/Polish -> Fade-in with subtle slide-up on scroll -> Makes navigation feel like activating modules. Holographic Content Reveals -> Immersion/Engagement -> Text fades/slides into view on flip/scroll -> Content feels dynamically projected. NEW: Advanced Dynamic Grid Overlay -> Atmosphere/Immersion -> Subtle animated grid -> Reinforces high-tech, living interface feel. 2) Core Skills -> Inform/Organize -> Interactive Flip Cards with Holographic Reveal -> Deeper engagement; reveals details dynamically. 3) Skill Levels -> Compare -> Chart.js Radar Chart with Load Animation -> Visually compelling data comparison, simulates "system boot-up." 4) Projects -> Organize/Inform -> Filterable Gallery with Enhanced Card Hovers -> Improved navigation and visual feedback. 5) Experience & Education -> Inform/Sequence -> Animated Timeline with Glowing Nodes -> Presents chronological data engagingly, with clear milestones. This comprehensive approach uses tailored interactions and animations to amplify the futuristic theme across all content types. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- FontAwesome CDN for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Three.js CDN for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
@@ -22,6 +24,7 @@
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             background-image: radial-gradient(circle at center, #1A0F2B 0%, #0A0A10 70%); /* Subtle radial gradient */
+            cursor: none; /* Hide default cursor */
         }
         h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
         .neon-text-blue { text-shadow: 0 0 8px #00aaff, 0 0 16px #00aaff, 0 0 32px #00aaff, 0 0 64px #00aaff; }
@@ -31,14 +34,56 @@
         .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #00aaff, #ff00ff); transform: translateX(-101%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .nav-link.active::after, .nav-link:hover::after { transform: translateX(0); }
         .animated-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: transparent; overflow: hidden; }
-        .animated-bg div { position: absolute; display: block; width: 25px; height: 25px; background: rgba(0, 200, 255, 0.1); bottom: -200px; animation: animate-bg 30s linear infinite; border-radius: 50%; box-shadow: 0 0 10px rgba(0, 200, 255, 0.5); }
+        .animated-bg div {
+            position: absolute; display: block;
+            background: linear-gradient(45deg, rgba(0, 200, 255, 0.1), rgba(255, 50, 200, 0.15));
+            bottom: -200px;
+            animation: animate-bg 30s linear infinite;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+            opacity: 0.8;
+        }
         .animated-bg div:nth-child(1) { left: 20%; width: 90px; height: 90px; animation-delay: 0s; }
-        .animated-bg div:nth-child(2) { left: 15%; width: 30px; height: 30px; animation-delay: 3s; animation-duration: 15s; background: rgba(255, 50, 200, 0.15); box-shadow: 0 0 12px rgba(255, 50, 200, 0.6); }
+        .animated-bg div:nth-child(2) { left: 15%; width: 30px; height: 30px; animation-delay: 3s; animation-duration: 15s; background: linear-gradient(45deg, rgba(255, 50, 200, 0.15), rgba(0, 200, 255, 0.1)); box-shadow: 0 0 12px rgba(255, 50, 200, 0.6); }
         .animated-bg div:nth-child(3) { left: 80%; width: 40px; height: 40px; animation-delay: 6s; }
-        .animated-bg div:nth-child(4) { left: 30%; width: 70px; height: 70px; animation-delay: 2s; animation-duration: 20s; background: rgba(0, 255, 150, 0.1); box-shadow: 0 0 15px rgba(0, 255, 150, 0.5); }
+        .animated-bg div:nth-child(4) { left: 30%; width: 70px; height: 70px; animation-delay: 2s; animation-duration: 20s; background: linear-gradient(45deg, rgba(0, 255, 150, 0.1), rgba(0, 200, 255, 0.1)); box-shadow: 0 0 15px rgba(0, 255, 150, 0.5); }
         .animated-bg div:nth-child(5) { left: 60%; width: 25px; height: 25px; animation-delay: 0s; }
-        .animated-bg div:nth-child(6) { left: 90%; width: 120px; height: 120px; animation-delay: 4s; animation-duration: 28s; background: rgba(255, 200, 0, 0.12); box-shadow: 0 0 10px rgba(255, 200, 0, 0.6); }
-        @keyframes animate-bg { 0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 50%; } 100%{ transform: translateY(-1200px) rotate(720deg); opacity: 0; border-radius: 0; } }
+        .animated-bg div:nth-child(6) { left: 90%; width: 120px; height: 120px; animation-delay: 4s; animation-duration: 28s; background: linear-gradient(45deg, rgba(255, 200, 0, 0.12), rgba(255, 50, 200, 0.15)); box-shadow: 0 0 10px rgba(255, 200, 0, 0.6); }
+        @keyframes animate-bg {
+            0%{ transform: translateY(0) rotate(0deg); opacity: 0.8; border-radius: 50%; }
+            50%{ opacity: 0.4; } /* Subtle fade for pulsing */
+            100%{ transform: translateY(-1200px) rotate(720deg); opacity: 0; border-radius: 0; }
+        }
+
+        /* Dynamic Grid Overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2; /* Between animated-bg and main content */
+            pointer-events: none;
+            background-image:
+                linear-gradient(to right, rgba(0, 170, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 170, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px; /* Adjust grid cell size */
+            background-position: 0 0;
+            animation: grid-pan 60s linear infinite, grid-pulse 4s ease-in-out infinite alternate;
+            opacity: 0.7; /* Initial opacity */
+        }
+
+        @keyframes grid-pan {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; } /* Move by one grid cell */
+        }
+
+        @keyframes grid-pulse {
+            0% { opacity: 0.05; }
+            50% { opacity: 0.15; }
+            100% { opacity: 0.05; }
+        }
+
 
         .chart-container { position: relative; width: 100%; max-width: 800px; height: 450px; margin: auto; padding: 1.5rem; border-radius: 1rem; background: rgba(26, 26, 40, 0.8); border: 1px solid rgba(0, 220, 255, 0.2); box-shadow: 0 0 20px rgba(0, 220, 255, 0.1); }
         @media (min-width: 768px) { .chart-container { height: 600px; } }
@@ -70,6 +115,7 @@
             padding-top: 2rem;
             overflow: hidden; /* Ensure content is contained before internal scroll */
         }
+        /* Holographic reveal for flip card back content */
         .flip-card-back p {
             text-align: left;
             font-size: 0.95rem;
@@ -78,9 +124,14 @@
             overflow-y: auto;
             padding-right: 0.5rem;
             opacity: 0; /* Hidden by default */
-            transition: opacity 0.3s ease 0.3s; /* Delay for reveal after flip */
+            transform: translateY(10px); /* Start slightly below */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth transition */
+            transition-delay: 0.2s; /* Delay for reveal after flip */
         }
-        .flip-card.flipped .flip-card-back p { opacity: 1; } /* Reveal when flipped */
+        .flip-card.flipped .flip-card-back p {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* Style for scrollbar in flip-card-back for better aesthetics */
         .flip-card-back p::-webkit-scrollbar { width: 6px; }
@@ -91,15 +142,38 @@
         /* Timeline styles */
         .timeline-container { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
         .timeline-container::after { content: ''; position: absolute; width: 4px; background: linear-gradient(to bottom, #00aaff, #ff00ff); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
-        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; opacity: 0; transform: translateY(50px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .timeline-item.in-view { opacity: 1; transform: translateY(0); }
+        .timeline-item { 
+            padding: 10px 40px; 
+            position: relative; 
+            background-color: inherit; 
+            width: 50%; 
+            /* Initial opacity for timeline-item removed, will be controlled by parent section */
+            transform: translateY(50px); /* Only apply initial transform */
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Keep transition for both */
+        }
+        .timeline-item.in-view { 
+            opacity: 1; /* Ensure item is fully opaque once in view */
+            transform: translateY(0); 
+        }
         .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -13px; background-color: #0A0A10; border: 4px solid #00aaff; top: 15px; border-radius: 50%; z-index: 1; box-shadow: 0 0 10px #00aaff; animation: pulse-node 1.5s infinite alternate; }
         .timeline-left { left: 0; }
         .timeline-right { left: 50%; }
         .timeline-right::after { left: -12px; border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
-        .timeline-content { padding: 20px 30px; background: rgba(16, 16, 32, 0.7); position: relative; border-radius: 0.5rem; border: 1px solid rgba(0, 170, 255, 0.2); box-shadow: 0 0 15px rgba(0, 170, 255, 0.1); transition: all 0.3s ease; }
+        .timeline-content { 
+            padding: 20px 30px; 
+            background: rgba(16, 16, 32, 0.7); 
+            position: relative; 
+            border-radius: 0.5rem; 
+            border: 1px solid rgba(0, 170, 255, 0.2); 
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.1); 
+            transition: opacity 0.6s ease-out; /* Only opacity transition for content itself */
+            opacity: 0; /* Content is initially invisible */
+        }
+        .timeline-item.in-view .timeline-content { /* When item is in view, make content visible */
+            opacity: 1;
+        }
         .timeline-item:hover .timeline-content { transform: scale(1.02); border-color: rgba(255, 0, 255, 0.3); box-shadow: 0 0 20px rgba(255, 0, 255, 0.15); }
-        @keyframes pulse-node { 0% { transform: scale(1); box-shadow: 0 0 10px var(--node-color, #00aaff); } 100% { box-shadow: 0 0 20px var(--node-color, #00aaff), 0 0 30px var(--node-color, #00aaff); } }
+        @keyframes pulse-node { 0% { transform: scale(1); box-shadow: 0 0 10px var(--node-color, #00aaff); } 100% { transform: scale(1.1); box-shadow: 0 0 20px var(--node-color, #00aaff), 0 0 30px var(--node-color, #00aaff); } }
 
         @media screen and (max-width: 768px) {
             .timeline-container::after { left: 31px; }
@@ -121,6 +195,17 @@
         @keyframes pulse-button {
             0% { box-shadow: 0 0 5px #00aaff; }
             100% { box-shadow: 0 0 15px #00aaff, 0 0 25px #ff00ff; }
+        }
+
+        /* Holographic reveal for project card description */
+        .project-card-description {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .project-card-visible .project-card-description {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Hero Tagline Text Glow */
@@ -171,6 +256,51 @@
             100% { box-shadow: 0 0 25px #00aaff, 0 0 40px #ff00ff, 0 0 60px #00aaff; transform: scale(1.02); }
         }
 
+        /* 3D Canvas container styling */
+        #three-d-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 5; /* Behind content but above animated-bg divs */
+            pointer-events: none; /* Allows clicks/interactions to pass through to underlying elements */
+        }
+        #three-d-canvas {
+            display: block; /* Remove extra space below canvas */
+        }
+
+        /* Custom Cursor Trail */
+        .cursor-trail-dot {
+            position: fixed;
+            background: radial-gradient(circle at center, rgba(0, 170, 255, 0.7), rgba(255, 0, 255, 0.5));
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s ease-out, opacity 0.3s ease-out; /* Smooth movement and fade */
+            animation: dot-fade 0.8s forwards; /* Animation for individual dots */
+            z-index: 9999; /* Ensure it's on top */
+            transform: scale(0); /* Start scaled down */
+        }
+
+        @keyframes dot-fade {
+            0% { transform: scale(0.5); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Section Transition Animations */
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        section.section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Form input focus neon */
         .futuristic-input:focus {
             outline: none;
@@ -214,10 +344,17 @@
 
     <main>
         <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <!-- Dynamic Grid Overlay -->
+            <div class="grid-overlay"></div>
             <div class="animated-bg">
                 <div></div><div></div><div></div><div></div><div></div><div></div>
             </div>
-            <div class="text-center p-4 z-10">
+            <!-- 3D Canvas Container -->
+            <div id="three-d-container">
+                <canvas id="three-d-canvas"></canvas>
+            </div>
+
+            <div class="text-center p-4 z-10 relative"> <!-- Ensure content is above 3D canvas -->
                 <div class="avatar-container">
                     <img src="https://i.postimg.cc/XJQkh1vQ/Whats-App-Image-2025-06-19-at-22-01-36-861125e1.jpg" alt="EL's Avatar" />
                 </div>
@@ -305,10 +442,10 @@
                             </a>
                         </div>
                         <div class="mt-8">
-                            <a href="https://github.com/your-github-profile" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors duration-200 block text-lg font-semibold flex items-center justify-center space-x-2">
+                            <a href="https://github.com/alfarokidev" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors duration-200 block text-lg font-semibold flex items-center justify-center space-x-2">
                                 <i class="fab fa-github text-xl"></i><span>My GitHub Profile</span>
                             </a>
-                            <a href="https://linkedin.com/in/your-linkedin-profile" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors duration-200 block text-lg font-semibold mt-2 flex items-center justify-center space-x-2">
+                            <a href="https://linkedin.com/in/ahmad-alfaroki-0b4724318/" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors duration-200 block text-lg font-semibold mt-2 flex items-center justify-center space-x-2">
                                 <i class="fab fa-linkedin-in text-xl"></i><span>My LinkedIn Profile</span>
                             </a>
                         </div>
@@ -440,7 +577,7 @@
             ]
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.onload = function() {
             // Hero Tagline Typewriter Effect
             const taglineElement = document.getElementById('hero-tagline');
             const taglines = [
@@ -475,6 +612,91 @@
                 setTimeout(typeWriterEffect, typingSpeed);
             }
             typeWriterEffect();
+
+            // 3D Scene Initialization
+            const container = document.getElementById('three-d-container');
+            const canvas = document.getElementById('three-d-canvas');
+            
+            let scene, camera, renderer, cube;
+            let mouseX = 0, mouseY = 0;
+            let windowHalfX = window.innerWidth / 2;
+            let windowHalfY = window.innerHeight / 2;
+
+            function initThreeD() {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true }); // alpha: true for transparent background
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+
+                // Create a neon cube (BoxGeometry with LineBasicMaterial for wireframe glow)
+                const geometry = new THREE.BoxGeometry(0.8, 0.8, 0.8); // Smaller cube
+                const edges = new THREE.EdgesGeometry(geometry);
+                
+                // Material for the lines (neon blue)
+                const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00aaff, linewidth: 2 });
+                cube = new THREE.LineSegments(edges, lineMaterial);
+                scene.add(cube);
+
+                // Add a glowing effect with a second set of lines or a point light
+                const innerGeometry = new THREE.BoxGeometry(0.7, 0.7, 0.7); // Slightly smaller inner cube
+                const innerEdges = new THREE.EdgesGeometry(innerGeometry);
+                const innerLineMaterial = new THREE.LineBasicMaterial({ color: 0xff00ff, linewidth: 1 }); // Neon pink inner glow
+                const innerCube = new THREE.LineSegments(innerEdges, innerLineMaterial);
+                cube.add(innerCube); // Add as child to main cube for easier rotation
+
+                // Add subtle ambient light
+                const ambientLight = new THREE.AmbientLight(0x404040, 5); // soft white light, increased intensity
+                scene.add(ambientLight);
+
+                // Add directional light for subtle shadows/highlights
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+                directionalLight.position.set(5, 10, 7);
+                scene.add(directionalLight);
+
+                camera.position.z = 2; // Position camera further back
+
+                // Mouse interaction for subtle camera movement
+                document.addEventListener('mousemove', onDocumentMouseMove, false);
+                window.addEventListener('resize', onWindowResize, false);
+                
+                animateThreeD(); // Start the animation loop
+            }
+
+            function onDocumentMouseMove(event) {
+                mouseX = (event.clientX - windowHalfX) / 100;
+                mouseY = (event.clientY - windowHalfY) / 100;
+            }
+
+            function onWindowResize() {
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+                windowHalfX = window.innerWidth / 2;
+                windowHalfY = window.innerHeight / 2;
+            }
+
+            function animateThreeD() {
+                requestAnimationFrame(animateThreeD);
+
+                // Rotate the cube slowly
+                if (cube) { // Check if cube is defined
+                    cube.rotation.x += 0.005;
+                    cube.rotation.y += 0.005;
+                }
+                
+                // Subtle camera movement based on mouse
+                camera.position.x += ( mouseX - camera.position.x ) * .05;
+                camera.position.y += ( - mouseY - camera.position.y ) * .05;
+                camera.lookAt( scene.position );
+
+                renderer.render(scene, camera);
+            }
+
+            // Initialize 3D scene after DOM content is loaded
+            initThreeD();
 
 
             // Expertise Section - Card Flip Effect
@@ -527,7 +749,7 @@
                         <img src="${item.image}" alt="${item.title}" class="w-full h-48 object-cover border-b-2 border-blue-700">
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-white mb-2">${item.title}</h3>
-                            <p class="text-gray-400 text-sm">${item.description}</p>
+                            <p class="text-gray-400 text-sm project-card-description">${item.description}</p>
                             <div class="flex flex-wrap gap-2 mt-4">${techTags}</div>
                             <div class="flex justify-between items-center mt-6 text-gray-500 text-sm">
                                 <a href="#" target="_blank" class="hover:text-blue-400 transition-colors duration-200">View Demo</a>
@@ -536,6 +758,18 @@
                         </div>
                     `;
                     projectGallery.appendChild(card);
+
+                    // Observe project card for visibility to trigger description reveal
+                    const projectCardObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('project-card-visible');
+                                projectCardObserver.unobserve(entry.target); // Unobserve once visible
+                            }
+                        });
+                    }, { threshold: 0.2 }); // Trigger when 20% of card is visible
+
+                    projectCardObserver.observe(card); // Observe the card itself
                 });
             };
 
@@ -568,9 +802,9 @@
                 experienceGrid.appendChild(timelineItem);
             });
 
-            // Intersection Observer for Timeline Animations
+            // Intersection Observer for Timeline Animations (for individual items within Experience section)
             const timelineItems = document.querySelectorAll('.timeline-item');
-            const observerOptions = {
+            const timelineObserverOptions = {
                 root: null,
                 rootMargin: '0px',
                 threshold: 0.2 // Trigger when 20% of the item is visible
@@ -579,17 +813,37 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('in-view');
-                        // Optional: stop observing once it's animated
-                        // observer.unobserve(entry.target);
-                    } else {
-                        // Optional: remove in-view class when not visible
-                        // entry.target.classList.remove('in-view');
                     }
                 });
-            }, observerOptions);
+            }, timelineObserverOptions);
 
-            timelineItems.forEach(item => {
+            timelineItems.forEach((item) => {
                 timelineObserver.observe(item);
+            });
+
+
+            // Intersection Observer for Main Section Transitions (applied to all sections in 'main')
+            const sections = document.querySelectorAll('main section'); // Select all main content sections
+            const sectionObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the section is visible
+            };
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        // Optional: Unobserve once visible if you only want it to animate once
+                        // observer.unobserve(entry.target);
+                    } else {
+                        // Optional: remove visible class if you want it to re-animate on scroll back
+                        // entry.target.classList.remove('section-visible');
+                    }
+                });
+            }, sectionObserverOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
             });
             
             // Proficiency Radar Chart
@@ -636,7 +890,6 @@
                                 max: 10,
                                 color: '#E0E0E0', /* Text color for ticks */
                                 backdropColor: 'rgba(26, 26, 40, 0.8)', /* Darker backdrop for ticks */
-                                backdropPadding: 6,
                                 borderRadius: 4,
                             }
                         }
@@ -670,12 +923,13 @@
             });
 
             // Smooth scroll active nav link highlighting
-            const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
             window.addEventListener('scroll', () => {
                 let current = '';
+                // Use the 'sections' NodeList from the section observer
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
+                    // Adjust this offset based on header height or desired activation point
                     if (pageYOffset >= sectionTop - 100) { 
                         current = section.getAttribute('id');
                     }
@@ -687,7 +941,25 @@
                     }
                 });
             });
-        });
+
+            // Interactive Cursor Trail
+            document.addEventListener('mousemove', function(e) {
+                const dot = document.createElement('div');
+                dot.className = 'cursor-trail-dot';
+                document.body.appendChild(dot);
+
+                const size = Math.random() * 8 + 4; // Random size between 4px and 12px
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.left = e.clientX - (size / 2) + 'px';
+                dot.style.top = e.clientY - (size / 2) + 'px';
+
+                // Remove the dot after its animation
+                dot.addEventListener('animationend', () => {
+                    dot.remove();
+                });
+            });
+        };
     </script>
 </body>
 </html>
