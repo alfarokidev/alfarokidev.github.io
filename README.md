@@ -4,7 +4,7 @@
 
 ## 🚀 Tech Stack
 - ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge)
-- Dart & Flutter
+- ![Dart](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge)
 - C / C++
 - C#
 
